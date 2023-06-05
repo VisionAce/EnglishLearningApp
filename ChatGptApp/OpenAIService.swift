@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class OpenAIService{
+class OpenAIService {
     private let endpointUrl = "https://api.openai.com/v1/chat/completions"
     func sendMessage(messages: [Message]) async -> OpenAIChatResponse? {
         let openAIMessages = messages.map({OpenAIChatmessage(role: $0.role, content: $0.content)})
@@ -21,7 +21,7 @@ class OpenAIService{
     }
 }
 
-struct OpenAIChatBody: Encodable{
+struct OpenAIChatBody: Encodable {
     let model: String
     let messages: [OpenAIChatmessage]
 }
@@ -37,10 +37,10 @@ enum SenderRole:String, Codable {
     case assistant
 }
 
-struct OpenAIChatResponse: Decodable{
+struct OpenAIChatResponse: Decodable {
     let choices: [OpenAIChatChoice]
 }
 
-struct OpenAIChatChoice: Decodable{
+struct OpenAIChatChoice: Decodable {
     let message: OpenAIChatmessage
 }
